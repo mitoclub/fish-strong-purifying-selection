@@ -1,5 +1,5 @@
 ---
-title: "Fish Handicap: if there is an interaction between mutational burden and tempearture shock?"
+title: "Fishашыр Handicap: if there is an interaction between mutational burden and tempearture shock?"
 author: "Konstantin Popadin"
 date: "7/July/2022"
 output:
@@ -38,7 +38,7 @@ The key question: does decrease in fitness due to ENU interact with increase in 
 #### 1. Read and describe data from the main (third) experiment 
 ***
 ```{r}
-Fish = read.table('../data/fishes_shok.txt', header=TRUE)
+Fish = read.table('C:/fish/fishes_shok.txt', header=TRUE)
 
 head(Fish)
 table(Fish$family)
@@ -142,119 +142,62 @@ Final$time = as.numeric(Final$time)
 
 <br><br><br>
 
-#### 4. run logistic regressions: Fitness ~ DummyMutant + DummyShock + DummyMutant*DummyShock
-## Need to take into accnout families 
-## interaction LikBez: https://www.youtube.com/watch?v=gjKzpxY4EqE
-***
-```{r}
-
-# effect of a mutagen: AS EXPECTED FOR ALL FOUR PHENOTYPES !!!
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1, family = binomial)) # -0.62380
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2, family = binomial)) # -1.34791
-
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant1, family = binomial)) # -0.7701
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant2, family = binomial)) # -1.2542
-
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$DummyMutant1, family = binomial)) # -1.25509
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$DummyMutant2, family = binomial)) # -1.84769
-
-summary(glm(Final$FertilizedOrNot ~ Final$DummyMutant1, family = binomial)) # -0.43879
-summary(glm(Final$FertilizedOrNot ~ Final$DummyMutant2, family = binomial)) # -1.39644
-
-# effect of a shock for Dummy Variables:  AS EXPECTED FOR HatchedOrNot and noisy for other phenotypes (including for FertilizedOrNot - where we don't expect to see any effects)
-summary(glm(Final$HatchedOrNot ~ Final$DummyShock30, family = binomial)) # -0.39905
-summary(glm(Final$HatchedOrNot ~ Final$DummyShock40, family = binomial)) # -1.22456
-summary(glm(Final$HatchedOrNot ~ Final$DummyShock50, family = binomial)) # -1.21147
-
-summary(glm(Final$SwimmingOrNot ~ Final$DummyShock30, family = binomial)) # -1.0765
-summary(glm(Final$SwimmingOrNot ~ Final$DummyShock40, family = binomial)) # 0
-summary(glm(Final$SwimmingOrNot ~ Final$DummyShock50, family = binomial)) # 0
-
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$DummyShock30, family = binomial)) # 0.62001
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$DummyShock40, family = binomial)) # 0
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$DummyShock50, family = binomial)) # 0.68270
-
-summary(glm(Final$FertilizedOrNot ~ Final$DummyShock30, family = binomial)) # 0.20943
-summary(glm(Final$FertilizedOrNot ~ Final$DummyShock40, family = binomial)) # -0.36805
-summary(glm(Final$FertilizedOrNot ~ Final$DummyShock50, family = binomial)) # 0.24872
-
-# effect of a shock as a continuous time variable
-
-summary(Final$time)
-summary(glm(Final$HatchedOrNot ~ Final$time, family = binomial)) # -0.025959
-summary(glm(Final$SwimmingOrNot ~ Final$time, family = binomial)) # -0.006894
-summary(glm(Final$SwimmingNormallyOrNot ~ Final$time, family = binomial)) # 0.011482 ?????
-
-# additive effects of mutagen and shock:  AS EXPECTED!!!
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1 + Final$DummyShock30, family = binomial)) # -0.61908 -0.54235
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1 + Final$DummyShock40, family = binomial)) # -1.48739 -0.86483
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1 + Final$DummyShock50, family = binomial)) # -0.56460 -1.40612
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2 + Final$DummyShock30, family = binomial)) # -1.20038 -0.73067
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2 + Final$DummyShock40, family = binomial)) # -2.4482  -1.5739
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2 + Final$DummyShock50, family = binomial)) # -1.51755 -1.89158
-
-summary(glm(Final$HatchedOrNot ~ scale(Final$DummyMutant1) + scale(Final$time), family = binomial)) # -0.34256 -0.51032 GOOD
-summary(glm(Final$HatchedOrNot ~ scale(Final$DummyMutant2) + scale(Final$time), family = binomial)) # -0.85140 -0.70167 GOOD
-
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant1 + Final$DummyShock30, family = binomial))
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant1 + Final$DummyShock40, family = binomial))
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant1 + Final$DummyShock50, family = binomial))
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant2 + Final$DummyShock30, family = binomial)) # -0.8848 -1.1246
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant2 + Final$DummyShock40, family = binomial))
-summary(glm(Final$SwimmingOrNot ~ Final$DummyMutant2 + Final$DummyShock50, family = binomial))
-
-# epistatic effects of mutagen and shock:  UNCLEAR (negative under 40 minutes and positive otherwise...)
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1*Final$DummyShock30, family = binomial))   # 0.8869 ***
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1*Final$DummyShock40, family = binomial))   # -0.6047 **
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1*Final$DummyShock50, family = binomial))   # 1.0030 ***
-
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2*Final$DummyShock30, family = binomial))   # 0.5920 ***
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2*Final$DummyShock40, family = binomial))   # -2.9985 ***
-summary(glm(Final$HatchedOrNot ~ Final$DummyMutant2*Final$DummyShock50, family = binomial))   # 0
-
-summary(glm(Final$HatchedOrNot ~ scale(Final$DummyMutant1)*scale(Final$time), family = binomial)) # positive, fuck
-summary(glm(Final$HatchedOrNot ~ scale(Final$DummyMutant2)*scale(Final$time), family = binomial)) # a bit negative, but non significant
 
 
 
-# epistatic effects of mutagen and shock for each family separately - we need to add nested effect of families!   
-Fam11=Final[Final$family == '1x1',]
-Fam12=Final[Final$family == '1x2',]
-Fam21=Final[Final$family == '2x1',]
-Fam22=Final[Final$family == '2x2',]
+#STarting PDF
+pdf(file='ENU0111.pdf')
+#Step sep our concentrations by 0 1 2
+Fish$enu = as.factor(Fish$enu)
+enu_n_0 = paste('N=',nrow(Fish[Fish$enu == 0,]),sep='')
+enu_n_1 = paste('N=',nrow(Fish[Fish$enu == 1,]),sep='')
+enu_n_2 = paste('N=',nrow(Fish[Fish$enu == 2,]),sep='')
+#sasha
 
-## Fam11 
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant1*Fam11$DummyShock30)) # +
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant1*Fam11$DummyShock40))
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant1*Fam11$DummyShock50)) # + 
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant2*Fam11$DummyShock30))
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant2*Fam11$DummyShock40))
-summary(glm(Fam11$HatchedOrNot ~ Fam11$DummyMutant2*Fam11$DummyShock50)) # +
 
-## Fam12
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant1*Fam12$DummyShock30))
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant1*Fam12$DummyShock40))
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant1*Fam12$DummyShock50)) # + 
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant2*Fam12$DummyShock30))
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant2*Fam12$DummyShock40))
-summary(glm(Fam12$HatchedOrNot ~ Fam12$DummyMutant2*Fam12$DummyShock50)) # +
 
-## Fam21 
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant1*Fam21$DummyShock30))
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant1*Fam21$DummyShock40))
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant1*Fam21$DummyShock50)) # - 
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant2*Fam21$DummyShock30)) # +
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant2*Fam21$DummyShock40))
-summary(glm(Fam21$HatchedOrNot ~ Fam21$DummyMutant2*Fam21$DummyShock50)) 
 
-## Fam22 
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant1*Fam22$DummyShock30))
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant1*Fam22$DummyShock40))
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant1*Fam22$DummyShock50)) 
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant2*Fam22$DummyShock30)) 
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant2*Fam22$DummyShock40)) # -
-summary(glm(Fam22$HatchedOrNot ~ Fam22$DummyMutant2*Fam22$DummyShock50)) # - 
 
-```
 
+
+getwd()
+
+#Step sep our concentrations by 0 1 2
+Fish$enu = as.factor(Fish$enu)
+enu_n_0 = paste('N=',nrow(Fish[Fish$enu == 0,]),sep='')
+enu_n_1 = paste('N=',nrow(Fish[Fish$enu == 1,]),sep='')
+enu_n_2 = paste('N=',nrow(Fish[Fish$enu == 2,]),sep='')
+
+#fertilization_per
+
+boxplot(Fish[Fish$enu==0,]$fertilization_per, Fish[Fish$enu==1,]$fertilization_per, Fish[Fish$enu==2,]$fertilization_per, notch=TRUE, scale_x_discrete(labels=c(paste("0", enu_n_0,sep='\n'), paste("1", enu_n_1,sep='\n'), paste("2", enu_n_2,sep='\n')))
+
+
+scale_x_discrete(labels=c(paste("0", enu_n_0,sep='\n'), paste("1", enu_n_1,sep='\n'), paste("2", enu_n_2,sep='\n')))
+
+#hatched_per
+paste("0", number_of_zero), ()
+boxplot(Fish[Fish$enu==0,]$hatched_per, Fish[Fish$enu==1,]$hatched_per, Fish[Fish$enu==2,]$hatched_per, notch=TRUE, names = c(paste("0, N=", number_of_zero), '1', '2'), xlab = "enu", ylab = "hatched_per")
+
+wilcox.test(Fish[Fish$enu==0,]$swim_per, Fish[Fish$enu==1,]$swim_per)
+#swim_per
+paste("0", enu_n_0)
+paste("1", enu_n_1)
+paste("2", enu_n_2)
+
+
+boxplot(Fish[Fish$enu==0,]$swim_per, Fish[Fish$enu==1,]$swim_per, Fish[Fish$enu==2,]$swim_per, notch=TRUE, names = c(paste("0,", enu_n_0,sep='\n'), paste("1,", enu_n_1,sep='\n'), paste("2,", enu_n_2,sep='\n')), xlab = "enu", ylab = "swim_per")
+
+wilcox.test(Fish[Fish$enu==0,]$swim_per, Fish[Fish$enu==1,]$swim_per)
+
+#freaks_per
+paste("0", number_of_zero)
+boxplot(Fish[Fish$enu==0,]$freaks_per, Fish[Fish$enu==1,]$freaks_per, Fish[Fish$enu==2,]$freaks_per, notch=TRUE, names = c((labels=c(paste("0", enu_n_0,sep='\n'), paste("1", enu_n_1,sep='\n'), paste("2", enu_n_2,sep='\n')))), xlab = "enu", ylab = "freaks_per")
+
+
+wilcox.test(Fish[Fish$enu==0,]$freaks_per, Fish[Fish$enu==1,]$freaks_per)
+
+
+dev.off()
+getwd()
 
