@@ -611,8 +611,1142 @@ table(Final$Male1OrNot)</code></pre>
 <pre class="r"><code>write.table(Final, &#39;../data/Derive.txt&#39;, quote = FALSE, sep = &#39;\t&#39;, row.names = FALSE)</code></pre>
 <p><br><br><br></p>
 </div>
+<div id="intrafamilial-best-analyses-paper" class="section level4">
+<h4>4. intrafamilial best analyses (PAPER)</h4>
+<hr />
+<pre class="r"><code>#### THE BEST ANALYSES SHOULD BE DONE WITHIN EACH FAMILY: UNDER ALL ELSE EQUAL - THE SAME GENETICS OF MOTHER AND FATHER. out of four families one (1x1) has strange results (no effect of heat shock), another (2x1) no interaction and two others (2x2 and 1x2) negative interaction. So, not so bad! 
+
+#### check whether each family shows expected simple trends: negative correlation with heat shock and negative with mutagen:
+
+Final1 = Final[Final$family == &#39;1x1&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9577  -0.7619  -0.6722   1.2002   1.4792  
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)    -0.03241    0.02017  -1.607    0.108    
+## scale(Final1$MutagenConcentration) -0.10843    0.01980  -5.478 4.74e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9883323)
+## 
+##     Null deviance: 2511.0  on 2512  degrees of freedom
+## Residual deviance: 2480.7  on 2510  degrees of freedom
+##   (995 observations deleted due to missingness)
+## AIC: 7103.3
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family == &#39;1x2&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 +  scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6747  -0.5226  -0.3699   0.9561   2.2359  
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)    -0.40876    0.02324 -17.591   &lt;2e-16 ***
+## scale(Final1$MutagenConcentration) -0.20066    0.02064  -9.722   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8298329)
+## 
+##     Null deviance: 1737.0  on 1738  degrees of freedom
+## Residual deviance: 1440.6  on 1736  degrees of freedom
+##   (1536 observations deleted due to missingness)
+## AIC: 4612
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family == &#39;2x1&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.02292  -0.82814  -0.00269   0.63181   1.44590  
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)    -0.23299    0.01830  -12.73   &lt;2e-16 ***
+## scale(Final1$MutagenConcentration) -0.34536    0.01941  -17.80   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8212228)
+## 
+##     Null deviance: 2234.0  on 2235  degrees of freedom
+## Residual deviance: 1833.8  on 2233  degrees of freedom
+##   (790 observations deleted due to missingness)
+## AIC: 5906.4
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family == &#39;2x2&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1280  -0.5907  -0.1568   0.6687   1.8465  
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)    -0.42811    0.02033  -21.06   &lt;2e-16 ***
+## scale(Final1$MutagenConcentration) -0.34538    0.01961  -17.61   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7064394)
+## 
+##     Null deviance: 1707.0  on 1708  degrees of freedom
+## Residual deviance: 1205.2  on 1706  degrees of freedom
+##   (731 observations deleted due to missingness)
+## AIC: 4257.5
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) </code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8880  -0.5941  -0.4032   0.8550   1.7904  
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                        -0.04720    0.01202  -3.927 8.69e-05 ***
+## scale(Final1$HeatShockDuration)    -0.33820    0.01176 -28.749  &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration) -0.30614    0.01165 -26.287  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7978246)
+## 
+##     Null deviance: 5680  on 5680  degrees of freedom
+## Residual deviance: 4530  on 5678  degrees of freedom
+##   (3057 observations deleted due to missingness)
+## AIC: 14844
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>##### so, family 1x1 doesn&#39;t show expected trend - either something was wrong, or genetical combination is unusual (tolerability to stress)? we can exclude it from additional analyses because additional analyses are based on interaction of variables, but if there is no individual effect -&gt; no sense to see the interaction. 
+
+#### check whether each family shows interaction (different results but never positive significant)
+
+Final1 = Final[Final$family == &#39;1x2&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6301  -0.5441  -0.3685   0.9491   2.2477  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.40945
+## scale(Final1$MutagenConcentration)                                 -0.19887
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.01423
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.02327
+## scale(Final1$MutagenConcentration)                                    0.02083
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.02193
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -17.599
+## scale(Final1$MutagenConcentration)                                  -9.548
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.649
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
+## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.516    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8301097)
+## 
+##     Null deviance: 1737.0  on 1738  degrees of freedom
+## Residual deviance: 1440.2  on 1735  degrees of freedom
+##   (1536 observations deleted due to missingness)
+## AIC: 4613.6
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family == &#39;2x1&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.00454  -0.82828   0.01569   0.61931   1.45864  
+## 
+## Coefficients:
+##                                                                     Estimate
+## scale(Final1$HeatShockDuration)                                    -0.235063
+## scale(Final1$MutagenConcentration)                                 -0.346064
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.009832
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                      0.018706
+## scale(Final1$MutagenConcentration)                                   0.019454
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.018308
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -12.566
+## scale(Final1$MutagenConcentration)                                 -17.789
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.537
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
+## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.591    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8214846)
+## 
+##     Null deviance: 2234.0  on 2235  degrees of freedom
+## Residual deviance: 1833.6  on 2232  degrees of freedom
+##   (790 observations deleted due to missingness)
+## AIC: 5908.2
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family == &#39;2x2&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.89061  -0.55737  -0.01529   0.59154   1.98798  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.45045
+## scale(Final1$MutagenConcentration)                                 -0.34252
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.11935
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.02042
+## scale(Final1$MutagenConcentration)                                    0.01940
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01907
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -22.058
+## scale(Final1$MutagenConcentration)                                 -17.659
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -6.259
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 4.88e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.6909756)
+## 
+##     Null deviance: 1707.0  on 1708  degrees of freedom
+## Residual deviance: 1178.1  on 1705  degrees of freedom
+##   (731 observations deleted due to missingness)
+## AIC: 4220.7
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8527  -0.6508  -0.4347   0.7369   1.7747  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.34488
+## scale(Final1$MutagenConcentration)                                 -0.29858
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.03277
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01197
+## scale(Final1$MutagenConcentration)                                    0.01149
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01123
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -28.811
+## scale(Final1$MutagenConcentration)                                 -25.983
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -2.917
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.00355 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7987949)
+## 
+##     Null deviance: 5680.0  on 5681  degrees of freedom
+## Residual deviance: 4535.6  on 5678  degrees of freedom
+##   (3057 observations deleted due to missingness)
+## AIC: 14851
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; 
+summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration) + scale(Final1$Female1OrNot) + scale(Final1$Male1OrNot)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration) + scale(Final1$Female1OrNot) + 
+##     scale(Final1$Male1OrNot))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0450  -0.7114  -0.1875   0.7254   2.0327  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.33895
+## scale(Final1$MutagenConcentration)                                 -0.28297
+## scale(Final1$Female1OrNot)                                         -0.15198
+## scale(Final1$Male1OrNot)                                            0.09867
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.04374
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01162
+## scale(Final1$MutagenConcentration)                                    0.01120
+## scale(Final1$Female1OrNot)                                            0.01427
+## scale(Final1$Male1OrNot)                                              0.01327
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01091
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -29.178
+## scale(Final1$MutagenConcentration)                                 -25.265
+## scale(Final1$Female1OrNot)                                         -10.648
+## scale(Final1$Male1OrNot)                                             7.436
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -4.008
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$Female1OrNot)                                          &lt; 2e-16 ***
+## scale(Final1$Male1OrNot)                                           1.19e-13 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 6.20e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7516288)
+## 
+##     Null deviance: 5680.0  on 5681  degrees of freedom
+## Residual deviance: 4266.2  on 5676  degrees of freedom
+##   (3057 observations deleted due to missingness)
+## AIC: 14507
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>############ OTHER ANALYSES 
+## family 1x1 HatchedOrNot positive, but effect of HeatShock is positive!
+Final1 = Final[Final$family == &#39;1x1&#39;,];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.81487  -0.86600  -0.06993   0.46573   2.00696  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.07231
+## scale(Final1$MutagenConcentration)                                 -0.25705
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08375
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01650
+## scale(Final1$MutagenConcentration)                                    0.01654
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01694
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                     -4.383
+## scale(Final1$MutagenConcentration)                                 -15.543
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   4.944
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                    1.20e-05 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 8.03e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9323524)
+## 
+##     Null deviance: 3506  on 3507  degrees of freedom
+## Residual deviance: 3267  on 3504  degrees of freedom
+## AIC: 9711.8
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2647  -0.5164  -0.4232   0.4347   2.2314  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.05908
+## scale(Final1$MutagenConcentration)                                 -0.20985
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.11997
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01664
+## scale(Final1$MutagenConcentration)                                    0.01668
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01709
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                     -3.550
+## scale(Final1$MutagenConcentration)                                 -12.581
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   7.021
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     0.00039 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 2.63e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9485387)
+## 
+##     Null deviance: 3506.0  on 3507  degrees of freedom
+## Residual deviance: 3323.7  on 3504  degrees of freedom
+## AIC: 9772.1
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # this model doesn&#39;t show effect of heat shock </code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.4535  -0.3577  -0.3137   0.5817   0.7182  
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                         0.349777   0.009608  36.404  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration)    -0.015885   0.009679  -1.641    0.101    
+## scale(Final1$MutagenConcentration) -0.053067   0.009587  -5.536 3.42e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2271319)
+## 
+##     Null deviance: 576.98  on 2511  degrees of freedom
+## Residual deviance: 569.87  on 2509  degrees of freedom
+##   (995 observations deleted due to missingness)
+## AIC: 3410.4
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.6291  -0.3386  -0.3180   0.6147   0.7857  
+## 
+## Coefficients:
+##                                                                     Estimate
+## (Intercept)                                                         0.359562
+## scale(Final1$HeatShockDuration)                                    -0.012097
+## scale(Final1$MutagenConcentration)                                 -0.056613
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.067839
+##                                                                    Std. Error
+## (Intercept)                                                          0.009621
+## scale(Final1$HeatShockDuration)                                      0.009603
+## scale(Final1$MutagenConcentration)                                   0.009510
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009720
+##                                                                    t value
+## (Intercept)                                                         37.373
+## scale(Final1$HeatShockDuration)                                     -1.260
+## scale(Final1$MutagenConcentration)                                  -5.953
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   6.979
+##                                                                    Pr(&gt;|t|)    
+## (Intercept)                                                         &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration)                                       0.208    
+## scale(Final1$MutagenConcentration)                                 3.00e-09 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 3.78e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2228933)
+## 
+##     Null deviance: 576.98  on 2511  degrees of freedom
+## Residual deviance: 559.02  on 2508  degrees of freedom
+##   (995 observations deleted due to missingness)
+## AIC: 3364.1
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.4412  -0.3663  -0.3487   0.5807   0.8282  
+## 
+## Coefficients:
+##                                                                  Estimate
+## (Intercept)                                                      0.355190
+## scale(Final1$HeatShockOrNot)                                     0.040528
+## scale(Final1$MutagenConcentration)                              -0.047744
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  0.034367
+##                                                                 Std. Error
+## (Intercept)                                                       0.009611
+## scale(Final1$HeatShockOrNot)                                      0.009494
+## scale(Final1$MutagenConcentration)                                0.009506
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009900
+##                                                                 t value
+## (Intercept)                                                      36.955
+## scale(Final1$HeatShockOrNot)                                      4.269
+## scale(Final1$MutagenConcentration)                               -5.023
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   3.472
+##                                                                 Pr(&gt;|t|)    
+## (Intercept)                                                      &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                                    2.04e-05 ***
+## scale(Final1$MutagenConcentration)                              5.46e-07 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 0.000526 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2246807)
+## 
+##     Null deviance: 576.98  on 2511  degrees of freedom
+## Residual deviance: 563.50  on 2508  degrees of freedom
+##   (995 observations deleted due to missingness)
+## AIC: 3384.1
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenOrNot))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.4589  -0.3683  -0.3683   0.5942   0.7952  
+## 
+## Coefficients:
+##                                                          Estimate Std. Error
+## (Intercept)                                              0.358432   0.009567
+## scale(Final1$HeatShockOrNot)                             0.040129   0.009504
+## scale(Final1$MutagenOrNot)                              -0.039706   0.009216
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  0.041707   0.009746
+##                                                         t value Pr(&gt;|t|)    
+## (Intercept)                                              37.464  &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                              4.222 2.51e-05 ***
+## scale(Final1$MutagenOrNot)                               -4.308 1.71e-05 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)   4.279 1.94e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2247925)
+## 
+##     Null deviance: 576.98  on 2511  degrees of freedom
+## Residual deviance: 563.78  on 2508  degrees of freedom
+##   (995 observations deleted due to missingness)
+## AIC: 3385.4
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>## family 1x2 HatchedOrNot weakly negative
+Final1 = Final[Final$family == &#39;1x2&#39;,];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7696  -0.7031  -0.2581   0.4598   2.7008  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.15912
+## scale(Final1$MutagenConcentration)                                 -0.28469
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.05667
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01740
+## scale(Final1$MutagenConcentration)                                    0.01720
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01848
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                     -9.146
+## scale(Final1$MutagenConcentration)                                 -16.551
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.067
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.00218 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9139101)
+## 
+##     Null deviance: 3273.0  on 3274  degrees of freedom
+## Residual deviance: 2989.4  on 3271  degrees of freedom
+## AIC: 9001.5
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.43200  -0.52001  -0.22840  -0.08924   3.15297  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.24379
+## scale(Final1$MutagenConcentration)                                 -0.24854
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.06191
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01732
+## scale(Final1$MutagenConcentration)                                    0.01712
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01840
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -14.076
+## scale(Final1$MutagenConcentration)                                 -14.515
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.365
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 0.000774 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9057392)
+## 
+##     Null deviance: 3273.0  on 3274  degrees of freedom
+## Residual deviance: 2962.7  on 3271  degrees of freedom
+## AIC: 8972.1
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.7116  -0.2366  -0.1519   0.4338   1.0145  
+## 
+## Coefficients:
+##                                                                     Estimate
+## (Intercept)                                                         0.260007
+## scale(Final1$HeatShockDuration)                                    -0.182040
+## scale(Final1$MutagenConcentration)                                 -0.090301
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.007975
+##                                                                    Std. Error
+## (Intercept)                                                          0.010011
+## scale(Final1$HeatShockDuration)                                      0.010350
+## scale(Final1$MutagenConcentration)                                   0.009399
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009860
+##                                                                    t value
+## (Intercept)                                                         25.972
+## scale(Final1$HeatShockDuration)                                    -17.588
+## scale(Final1$MutagenConcentration)                                  -9.608
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.809
+##                                                                    Pr(&gt;|t|)    
+## (Intercept)                                                          &lt;2e-16 ***
+## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
+## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.419    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1642773)
+## 
+##     Null deviance: 343.82  on 1737  degrees of freedom
+## Residual deviance: 284.86  on 1734  degrees of freedom
+##   (1536 observations deleted due to missingness)
+## AIC: 1799.1
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.5214  -0.3581  -0.1678   0.4826   0.8957  
+## 
+## Coefficients:
+##                                                                  Estimate
+## (Intercept)                                                      0.257998
+## scale(Final1$HeatShockOrNot)                                    -0.133702
+## scale(Final1$MutagenConcentration)                              -0.079277
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) -0.039715
+##                                                                 Std. Error
+## (Intercept)                                                       0.010390
+## scale(Final1$HeatShockOrNot)                                      0.010826
+## scale(Final1$MutagenConcentration)                                0.009776
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.010856
+##                                                                 t value
+## (Intercept)                                                      24.831
+## scale(Final1$HeatShockOrNot)                                    -12.351
+## scale(Final1$MutagenConcentration)                               -8.109
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  -3.658
+##                                                                 Pr(&gt;|t|)    
+## (Intercept)                                                      &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                              9.53e-16 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 0.000262 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1758521)
+## 
+##     Null deviance: 343.82  on 1737  degrees of freedom
+## Residual deviance: 304.93  on 1734  degrees of freedom
+##   (1536 observations deleted due to missingness)
+## AIC: 1917.4
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenOrNot))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.5397  -0.3610  -0.1416   0.4880   0.8584  
+## 
+## Coefficients:
+##                                                          Estimate Std. Error
+## (Intercept)                                              0.262770   0.010281
+## scale(Final1$HeatShockOrNot)                            -0.131684   0.010746
+## scale(Final1$MutagenOrNot)                              -0.076962   0.009544
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.033481   0.011103
+##                                                         t value Pr(&gt;|t|)    
+## (Intercept)                                              25.559  &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                            -12.255  &lt; 2e-16 ***
+## scale(Final1$MutagenOrNot)                               -8.064 1.36e-15 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.016   0.0026 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1759814)
+## 
+##     Null deviance: 343.82  on 1737  degrees of freedom
+## Residual deviance: 305.15  on 1734  degrees of freedom
+##   (1536 observations deleted due to missingness)
+## AIC: 1918.7
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>## family 2x1 HatchedOrNot no interaction
+Final1 = Final[Final$family == &#39;2x1&#39;,];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.26078  -0.83679  -0.03696   0.76703   1.75275  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.17567
+## scale(Final1$MutagenConcentration)                                 -0.37153
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08912
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01654
+## scale(Final1$MutagenConcentration)                                    0.01652
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01628
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -10.621
+## scale(Final1$MutagenConcentration)                                 -22.494
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   5.473
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 4.79e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8245148)
+## 
+##     Null deviance: 3024.0  on 3025  degrees of freedom
+## Residual deviance: 2491.7  on 3022  degrees of freedom
+## AIC: 8005.9
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8994  -0.6074  -0.3551   0.6882   1.9207  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.19992
+## scale(Final1$MutagenConcentration)                                 -0.40362
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08474
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01621
+## scale(Final1$MutagenConcentration)                                    0.01619
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01596
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                     -12.33
+## scale(Final1$MutagenConcentration)                                  -24.93
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    5.31
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 1.17e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7918597)
+## 
+##     Null deviance: 3024  on 3025  degrees of freedom
+## Residual deviance: 2393  on 3022  degrees of freedom
+## AIC: 7883.6
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.97518  -0.38665   0.02482   0.32566   0.74596  
+## 
+## Coefficients:
+##                                                                     Estimate
+## (Intercept)                                                         0.550106
+## scale(Final1$HeatShockDuration)                                    -0.116992
+## scale(Final1$MutagenConcentration)                                 -0.173435
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.004779
+##                                                                    Std. Error
+## (Intercept)                                                          0.009534
+## scale(Final1$HeatShockDuration)                                      0.009256
+## scale(Final1$MutagenConcentration)                                   0.009669
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009054
+##                                                                    t value
+## (Intercept)                                                         57.697
+## scale(Final1$HeatShockDuration)                                    -12.640
+## scale(Final1$MutagenConcentration)                                 -17.938
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.528
+##                                                                    Pr(&gt;|t|)    
+## (Intercept)                                                          &lt;2e-16 ***
+## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
+## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.598    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2009199)
+## 
+##     Null deviance: 547.37  on 2234  degrees of freedom
+## Residual deviance: 448.25  on 2231  degrees of freedom
+##   (790 observations deleted due to missingness)
+## AIC: 2761.8
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.99746  -0.41850   0.00254   0.30632   0.67966  
+## 
+## Coefficients:
+##                                                                  Estimate
+## (Intercept)                                                      0.548157
+## scale(Final1$HeatShockOrNot)                                    -0.115899
+## scale(Final1$MutagenConcentration)                              -0.167760
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  0.002195
+##                                                                 Std. Error
+## (Intercept)                                                       0.009558
+## scale(Final1$HeatShockOrNot)                                      0.009310
+## scale(Final1$MutagenConcentration)                                0.009706
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009181
+##                                                                 t value
+## (Intercept)                                                      57.351
+## scale(Final1$HeatShockOrNot)                                    -12.448
+## scale(Final1$MutagenConcentration)                              -17.285
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.239
+##                                                                 Pr(&gt;|t|)    
+## (Intercept)                                                       &lt;2e-16 ***
+## scale(Final1$HeatShockOrNot)                                      &lt;2e-16 ***
+## scale(Final1$MutagenConcentration)                                &lt;2e-16 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)    0.811    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2012733)
+## 
+##     Null deviance: 547.37  on 2234  degrees of freedom
+## Residual deviance: 449.04  on 2231  degrees of freedom
+##   (790 observations deleted due to missingness)
+## AIC: 2765.7
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenOrNot))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.95671  -0.40255   0.04329   0.32530   0.59745  
+## 
+## Coefficients:
+##                                                          Estimate Std. Error
+## (Intercept)                                              0.557315   0.009766
+## scale(Final1$HeatShockOrNot)                            -0.117455   0.009494
+## scale(Final1$MutagenOrNot)                              -0.128713   0.009603
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  0.000293   0.009093
+##                                                         t value Pr(&gt;|t|)    
+## (Intercept)                                              57.066   &lt;2e-16 ***
+## scale(Final1$HeatShockOrNot)                            -12.372   &lt;2e-16 ***
+## scale(Final1$MutagenOrNot)                              -13.404   &lt;2e-16 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)   0.032    0.974    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.2113469)
+## 
+##     Null deviance: 547.37  on 2234  degrees of freedom
+## Residual deviance: 471.51  on 2231  degrees of freedom
+##   (790 observations deleted due to missingness)
+## AIC: 2874.9
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>## family 2x2 HatchedOrNot == negative interaction
+Final1 = Final[Final$family == &#39;2x2&#39;,];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.27358  -0.67884   0.04213   0.43791   2.16899  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.19674
+## scale(Final1$MutagenConcentration)                                 -0.47590
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.07636
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01772
+## scale(Final1$MutagenConcentration)                                    0.01770
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01734
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -11.101
+## scale(Final1$MutagenConcentration)                                 -26.882
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   4.403
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 1.11e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7532005)
+## 
+##     Null deviance: 2438.0  on 2439  degrees of freedom
+## Residual deviance: 1834.8  on 2436  degrees of freedom
+## AIC: 6235.3
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9314  -0.4907  -0.1934   0.4834   2.4603  
+## 
+## Coefficients:
+##                                                                    Estimate
+## scale(Final1$HeatShockDuration)                                    -0.29250
+## scale(Final1$MutagenConcentration)                                 -0.47794
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.05868
+##                                                                    Std. Error
+## scale(Final1$HeatShockDuration)                                       0.01730
+## scale(Final1$MutagenConcentration)                                    0.01728
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01693
+##                                                                    t value
+## scale(Final1$HeatShockDuration)                                    -16.904
+## scale(Final1$MutagenConcentration)                                 -27.651
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.466
+##                                                                    Pr(&gt;|t|)    
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 0.000538 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.7180215)
+## 
+##     Null deviance: 2438.0  on 2439  degrees of freedom
+## Residual deviance: 1749.1  on 2436  degrees of freedom
+## AIC: 6118.6
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9214  -0.2530   0.0203   0.3138   1.0203  
+## 
+## Coefficients:
+##                                                                     Estimate
+## (Intercept)                                                         0.445026
+## scale(Final1$HeatShockDuration)                                    -0.223898
+## scale(Final1$MutagenConcentration)                                 -0.175111
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.060631
+##                                                                    Std. Error
+## (Intercept)                                                          0.010224
+## scale(Final1$HeatShockDuration)                                      0.010189
+## scale(Final1$MutagenConcentration)                                   0.009829
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009516
+##                                                                    t value
+## (Intercept)                                                         43.527
+## scale(Final1$HeatShockDuration)                                    -21.975
+## scale(Final1$MutagenConcentration)                                 -17.815
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -6.371
+##                                                                    Pr(&gt;|t|)    
+## (Intercept)                                                         &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
+## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 2.41e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1717277)
+## 
+##     Null deviance: 425.36  on 1707  degrees of freedom
+## Residual deviance: 292.62  on 1704  degrees of freedom
+##   (731 observations deleted due to missingness)
+## AIC: 1843.9
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenConcentration))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9786  -0.2470  -0.1345   0.4154   0.8655  
+## 
+## Coefficients:
+##                                                                  Estimate
+## (Intercept)                                                      0.440720
+## scale(Final1$HeatShockOrNot)                                    -0.218409
+## scale(Final1$MutagenConcentration)                              -0.174548
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) -0.039127
+##                                                                 Std. Error
+## (Intercept)                                                       0.010337
+## scale(Final1$HeatShockOrNot)                                      0.010461
+## scale(Final1$MutagenConcentration)                                0.009944
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009838
+##                                                                 t value
+## (Intercept)                                                      42.636
+## scale(Final1$HeatShockOrNot)                                    -20.879
+## scale(Final1$MutagenConcentration)                              -17.554
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  -3.977
+##                                                                 Pr(&gt;|t|)    
+## (Intercept)                                                      &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                                     &lt; 2e-16 ***
+## scale(Final1$MutagenConcentration)                               &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 7.27e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1758892)
+## 
+##     Null deviance: 425.36  on 1707  degrees of freedom
+## Residual deviance: 299.72  on 1704  degrees of freedom
+##   (731 observations deleted due to missingness)
+## AIC: 1884.8
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
+##     scale(Final1$MutagenOrNot))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.9677  -0.2011  -0.2011   0.4229   0.7990  
+## 
+## Coefficients:
+##                                                          Estimate Std. Error
+## (Intercept)                                              0.446787   0.010412
+## scale(Final1$HeatShockOrNot)                            -0.212958   0.010611
+## scale(Final1$MutagenOrNot)                              -0.159476   0.009856
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.035154   0.010086
+##                                                         t value Pr(&gt;|t|)    
+## (Intercept)                                              42.911  &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot)                            -20.070  &lt; 2e-16 ***
+## scale(Final1$MutagenOrNot)                              -16.181  &lt; 2e-16 ***
+## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.485 0.000504 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1797347)
+## 
+##     Null deviance: 425.36  on 1707  degrees of freedom
+## Residual deviance: 306.27  on 1704  degrees of freedom
+##   (731 observations deleted due to missingness)
+## AIC: 1921.7
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p><br><br><br></p>
+</div>
 <div id="run-generalized-multiple-model-with-inclusivefitness-as-a-function-of-several-variables.-run-familial-analyses-2-out-of-three-normal-families-show-negative-epist-40-minuts-second-male-and-second-female." class="section level4">
-<h4>4. run generalized multiple model with InclusiveFitness as a function of several variables. Run familial analyses (2 out of three normal families show negative epist) 40 minuts, second male and second female.</h4>
+<h4>5. run generalized multiple model with InclusiveFitness as a function of several variables. Run familial analyses (2 out of three normal families show negative epist) 40 minuts, second male and second female.</h4>
 <hr />
 <pre class="r"><code>names(Final)</code></pre>
 <pre><code>##  [1] &quot;petri&quot;                 &quot;family&quot;                &quot;temperature&quot;          
@@ -1932,1238 +3066,10 @@ summary(glm(Final1$InclusiveFitness2 ~ scale(Final1$HeatShockDuration)*scale(Fin
 ## AIC: 3854.5
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>#### THE BEST ANALYSES SHOULD BE DONE WITHIN EACH FAMILY: UNDER ALL ELSE EQUAL - THE SAME GENETICS OF MOTHER AND FATHER. out of four families one (1x1) has strange results (no effect of heat shock), another (2x1) no interaction and two others (2x2 and 1x2) negative interaction. So, not so bad! 
-
-#### check whether each family shows expected simple trends: negative correlation with heat shock and negative with mutagen:
-
-Final1 = Final[Final$family == &#39;1x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # NO =&gt; which settings are wrong (which heat interval / mutagen)? check it later!!!</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.4535  -0.3577  -0.3137   0.5817   0.7182  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.349777   0.009608  36.404  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.015885   0.009679  -1.641    0.101    
-## scale(Final1$MutagenConcentration) -0.053067   0.009587  -5.536 3.42e-08 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2271319)
-## 
-##     Null deviance: 576.98  on 2511  degrees of freedom
-## Residual deviance: 569.87  on 2509  degrees of freedom
-##   (995 observations deleted due to missingness)
-## AIC: 3410.4
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;1x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.7374  -0.2254  -0.1539   0.4365   1.0065  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.261174   0.009906  26.366   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.181673   0.010340 -17.571   &lt;2e-16 ***
-## scale(Final1$MutagenConcentration) -0.091100   0.009346  -9.748   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1642446)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 284.96  on 1735  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1797.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9841  -0.3866   0.0159   0.3318   0.7398  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.550084   0.009533   57.70   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.115983   0.009055  -12.81   &lt;2e-16 ***
-## scale(Final1$MutagenConcentration) -0.173096   0.009646  -17.95   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.200855)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 448.31  on 2232  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2760.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -1.04457  -0.27313  -0.05499   0.35985   0.94501  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.448105   0.010331   43.38   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.212698   0.010152  -20.95   &lt;2e-16 ***
-## scale(Final1$MutagenConcentration) -0.176032   0.009942  -17.71   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1757155)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 299.60  on 1705  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1882.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # NO =&gt;</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9391  -0.2955  -0.2005   0.4253   0.8906  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.425385   0.005979   71.15   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.168226   0.005852  -28.75   &lt;2e-16 ***
-## scale(Final1$MutagenConcentration) -0.152280   0.005793  -26.29   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1974047)
-## 
-##     Null deviance: 1405.4  on 5680  degrees of freedom
-## Residual deviance: 1120.9  on 5678  degrees of freedom
-##   (3057 observations deleted due to missingness)
-## AIC: 6909.6
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>##### so, family 1x1 doesn&#39;t show expected trend - either something was wrong, or genetical combination is unusual (tolerability to stress)? we can exclude it from additional analyses because additional analyses are based on interaction of variables, but if there is no individual effect -&gt; no sense to see the interaction. 
-
-#### check whether each family shows interaction (different results but never positive significant)
-
-Final1 = Final[Final$family == &#39;1x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # NO</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.7116  -0.2366  -0.1519   0.4338   1.0145  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.260007
-## scale(Final1$HeatShockDuration)                                    -0.182040
-## scale(Final1$MutagenConcentration)                                 -0.090301
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.007975
-##                                                                    Std. Error
-## (Intercept)                                                          0.010011
-## scale(Final1$HeatShockDuration)                                      0.010350
-## scale(Final1$MutagenConcentration)                                   0.009399
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009860
-##                                                                    t value
-## (Intercept)                                                         25.972
-## scale(Final1$HeatShockDuration)                                    -17.588
-## scale(Final1$MutagenConcentration)                                  -9.608
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.809
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                          &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
-## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.419    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1642773)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 284.86  on 1734  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1799.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # NO</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -0.97518  -0.38665   0.02482   0.32566   0.74596  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.550106
-## scale(Final1$HeatShockDuration)                                    -0.116992
-## scale(Final1$MutagenConcentration)                                 -0.173435
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.004779
-##                                                                    Std. Error
-## (Intercept)                                                          0.009534
-## scale(Final1$HeatShockDuration)                                      0.009256
-## scale(Final1$MutagenConcentration)                                   0.009669
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009054
-##                                                                    t value
-## (Intercept)                                                         57.697
-## scale(Final1$HeatShockDuration)                                    -12.640
-## scale(Final1$MutagenConcentration)                                 -17.938
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.528
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                          &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
-## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.598    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2009199)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 448.25  on 2231  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2761.8
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9214  -0.2530   0.0203   0.3138   1.0203  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.445026
-## scale(Final1$HeatShockDuration)                                    -0.223898
-## scale(Final1$MutagenConcentration)                                 -0.175111
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.060631
-##                                                                    Std. Error
-## (Intercept)                                                          0.010224
-## scale(Final1$HeatShockDuration)                                      0.010189
-## scale(Final1$MutagenConcentration)                                   0.009829
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009516
-##                                                                    t value
-## (Intercept)                                                         43.527
-## scale(Final1$HeatShockDuration)                                    -21.975
-## scale(Final1$MutagenConcentration)                                 -17.815
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -6.371
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                         &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 2.41e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1717277)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 292.62  on 1704  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1843.9
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # YES! THIS IS THE BEST AND REASONABLE RESULT TILL NOW</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9000  -0.2957  -0.1900   0.3926   0.9121  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.424405
-## scale(Final1$HeatShockDuration)                                    -0.171614
-## scale(Final1$MutagenConcentration)                                 -0.152459
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.017496
-##                                                                    Std. Error
-## (Intercept)                                                          0.005982
-## scale(Final1$HeatShockDuration)                                      0.005946
-## scale(Final1$MutagenConcentration)                                   0.005789
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.005588
-##                                                                    t value
-## (Intercept)                                                         70.946
-## scale(Final1$HeatShockDuration)                                    -28.861
-## scale(Final1$MutagenConcentration)                                 -26.337
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -3.131
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                         &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.00175 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1970992)
-## 
-##     Null deviance: 1405.4  on 5680  degrees of freedom
-## Residual deviance: 1118.9  on 5677  degrees of freedom
-##   (3057 observations deleted due to missingness)
-## AIC: 6901.8
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;1x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.5397  -0.3610  -0.1416   0.4880   0.8584  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.262770   0.010281
-## scale(Final1$HeatShockOrNot)                            -0.131684   0.010746
-## scale(Final1$MutagenOrNot)                              -0.076962   0.009544
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.033481   0.011103
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              25.559  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -12.255  &lt; 2e-16 ***
-## scale(Final1$MutagenOrNot)                               -8.064 1.36e-15 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.016   0.0026 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1759814)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 305.15  on 1734  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1918.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # NO</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -0.95671  -0.40255   0.04329   0.32530   0.59745  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.557315   0.009766
-## scale(Final1$HeatShockOrNot)                            -0.117455   0.009494
-## scale(Final1$MutagenOrNot)                              -0.128713   0.009603
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  0.000293   0.009093
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              57.066   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -12.372   &lt;2e-16 ***
-## scale(Final1$MutagenOrNot)                              -13.404   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)   0.032    0.974    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2113469)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 471.51  on 2231  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2874.9
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family == &#39;2x2&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # YES</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9677  -0.2011  -0.2011   0.4229   0.7990  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.446787   0.010412
-## scale(Final1$HeatShockOrNot)                            -0.212958   0.010611
-## scale(Final1$MutagenOrNot)                              -0.159476   0.009856
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.035154   0.010086
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              42.911  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -20.070  &lt; 2e-16 ***
-## scale(Final1$MutagenOrNot)                              -16.181  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.485 0.000504 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1797347)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 306.27  on 1704  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1921.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>Final1 = Final[Final$family != &#39;1x1&#39;,]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # NO</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9020  -0.2605  -0.2605   0.4531   0.7395  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.431352   0.006068
-## scale(Final1$HeatShockOrNot)                            -0.157748   0.006086
-## scale(Final1$MutagenOrNot)                              -0.128025   0.005727
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.006932   0.005768
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              71.081   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -25.920   &lt;2e-16 ***
-## scale(Final1$MutagenOrNot)                              -22.354   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -1.202     0.23    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2053379)
-## 
-##     Null deviance: 1405.4  on 5680  degrees of freedom
-## Residual deviance: 1165.7  on 5677  degrees of freedom
-##   (3057 observations deleted due to missingness)
-## AIC: 7134.4
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>## family 1x1 HatchedOrNot positive, but effect of HeatShock is positive!
-Final1 = Final[Final$family == &#39;1x1&#39;,];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -1.81487  -0.86600  -0.06993   0.46573   2.00696  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.07231
-## scale(Final1$MutagenConcentration)                                 -0.25705
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08375
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01650
-## scale(Final1$MutagenConcentration)                                    0.01654
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01694
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                     -4.383
-## scale(Final1$MutagenConcentration)                                 -15.543
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   4.944
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                    1.20e-05 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 8.03e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.9323524)
-## 
-##     Null deviance: 3506  on 3507  degrees of freedom
-## Residual deviance: 3267  on 3504  degrees of freedom
-## AIC: 9711.8
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.2647  -0.5164  -0.4232   0.4347   2.2314  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.05908
-## scale(Final1$MutagenConcentration)                                 -0.20985
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.11997
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01664
-## scale(Final1$MutagenConcentration)                                    0.01668
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01709
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                     -3.550
-## scale(Final1$MutagenConcentration)                                 -12.581
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   7.021
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     0.00039 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 2.63e-12 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.9485387)
-## 
-##     Null deviance: 3506.0  on 3507  degrees of freedom
-## Residual deviance: 3323.7  on 3504  degrees of freedom
-## AIC: 9772.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # this model doesn&#39;t show effect of heat shock </code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) + 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.4535  -0.3577  -0.3137   0.5817   0.7182  
-## 
-## Coefficients:
-##                                     Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                         0.349777   0.009608  36.404  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)    -0.015885   0.009679  -1.641    0.101    
-## scale(Final1$MutagenConcentration) -0.053067   0.009587  -5.536 3.42e-08 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2271319)
-## 
-##     Null deviance: 576.98  on 2511  degrees of freedom
-## Residual deviance: 569.87  on 2509  degrees of freedom
-##   (995 observations deleted due to missingness)
-## AIC: 3410.4
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.6291  -0.3386  -0.3180   0.6147   0.7857  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.359562
-## scale(Final1$HeatShockDuration)                                    -0.012097
-## scale(Final1$MutagenConcentration)                                 -0.056613
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.067839
-##                                                                    Std. Error
-## (Intercept)                                                          0.009621
-## scale(Final1$HeatShockDuration)                                      0.009603
-## scale(Final1$MutagenConcentration)                                   0.009510
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009720
-##                                                                    t value
-## (Intercept)                                                         37.373
-## scale(Final1$HeatShockDuration)                                     -1.260
-## scale(Final1$MutagenConcentration)                                  -5.953
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   6.979
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                         &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)                                       0.208    
-## scale(Final1$MutagenConcentration)                                 3.00e-09 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 3.78e-12 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2228933)
-## 
-##     Null deviance: 576.98  on 2511  degrees of freedom
-## Residual deviance: 559.02  on 2508  degrees of freedom
-##   (995 observations deleted due to missingness)
-## AIC: 3364.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.4412  -0.3663  -0.3487   0.5807   0.8282  
-## 
-## Coefficients:
-##                                                                  Estimate
-## (Intercept)                                                      0.355190
-## scale(Final1$HeatShockOrNot)                                     0.040528
-## scale(Final1$MutagenConcentration)                              -0.047744
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  0.034367
-##                                                                 Std. Error
-## (Intercept)                                                       0.009611
-## scale(Final1$HeatShockOrNot)                                      0.009494
-## scale(Final1$MutagenConcentration)                                0.009506
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009900
-##                                                                 t value
-## (Intercept)                                                      36.955
-## scale(Final1$HeatShockOrNot)                                      4.269
-## scale(Final1$MutagenConcentration)                               -5.023
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   3.472
-##                                                                 Pr(&gt;|t|)    
-## (Intercept)                                                      &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                                    2.04e-05 ***
-## scale(Final1$MutagenConcentration)                              5.46e-07 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 0.000526 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2246807)
-## 
-##     Null deviance: 576.98  on 2511  degrees of freedom
-## Residual deviance: 563.50  on 2508  degrees of freedom
-##   (995 observations deleted due to missingness)
-## AIC: 3384.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.4589  -0.3683  -0.3683   0.5942   0.7952  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.358432   0.009567
-## scale(Final1$HeatShockOrNot)                             0.040129   0.009504
-## scale(Final1$MutagenOrNot)                              -0.039706   0.009216
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  0.041707   0.009746
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              37.464  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                              4.222 2.51e-05 ***
-## scale(Final1$MutagenOrNot)                               -4.308 1.71e-05 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)   4.279 1.94e-05 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2247925)
-## 
-##     Null deviance: 576.98  on 2511  degrees of freedom
-## Residual deviance: 563.78  on 2508  degrees of freedom
-##   (995 observations deleted due to missingness)
-## AIC: 3385.4
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>## family 1x2 HatchedOrNot weakly negative
-Final1 = Final[Final$family == &#39;1x2&#39;,];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.7696  -0.7031  -0.2581   0.4598   2.7008  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.15912
-## scale(Final1$MutagenConcentration)                                 -0.28469
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.05667
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01740
-## scale(Final1$MutagenConcentration)                                    0.01720
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01848
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                     -9.146
-## scale(Final1$MutagenConcentration)                                 -16.551
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.067
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.00218 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.9139101)
-## 
-##     Null deviance: 3273.0  on 3274  degrees of freedom
-## Residual deviance: 2989.4  on 3271  degrees of freedom
-## AIC: 9001.5
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -1.43200  -0.52001  -0.22840  -0.08924   3.15297  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.24379
-## scale(Final1$MutagenConcentration)                                 -0.24854
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.06191
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01732
-## scale(Final1$MutagenConcentration)                                    0.01712
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01840
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                    -14.076
-## scale(Final1$MutagenConcentration)                                 -14.515
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.365
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 0.000774 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.9057392)
-## 
-##     Null deviance: 3273.0  on 3274  degrees of freedom
-## Residual deviance: 2962.7  on 3271  degrees of freedom
-## AIC: 8972.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.7116  -0.2366  -0.1519   0.4338   1.0145  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.260007
-## scale(Final1$HeatShockDuration)                                    -0.182040
-## scale(Final1$MutagenConcentration)                                 -0.090301
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.007975
-##                                                                    Std. Error
-## (Intercept)                                                          0.010011
-## scale(Final1$HeatShockDuration)                                      0.010350
-## scale(Final1$MutagenConcentration)                                   0.009399
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009860
-##                                                                    t value
-## (Intercept)                                                         25.972
-## scale(Final1$HeatShockDuration)                                    -17.588
-## scale(Final1$MutagenConcentration)                                  -9.608
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.809
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                          &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
-## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.419    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1642773)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 284.86  on 1734  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1799.1
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.5214  -0.3581  -0.1678   0.4826   0.8957  
-## 
-## Coefficients:
-##                                                                  Estimate
-## (Intercept)                                                      0.257998
-## scale(Final1$HeatShockOrNot)                                    -0.133702
-## scale(Final1$MutagenConcentration)                              -0.079277
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) -0.039715
-##                                                                 Std. Error
-## (Intercept)                                                       0.010390
-## scale(Final1$HeatShockOrNot)                                      0.010826
-## scale(Final1$MutagenConcentration)                                0.009776
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.010856
-##                                                                 t value
-## (Intercept)                                                      24.831
-## scale(Final1$HeatShockOrNot)                                    -12.351
-## scale(Final1$MutagenConcentration)                               -8.109
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  -3.658
-##                                                                 Pr(&gt;|t|)    
-## (Intercept)                                                      &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                              9.53e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 0.000262 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1758521)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 304.93  on 1734  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1917.4
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.5397  -0.3610  -0.1416   0.4880   0.8584  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.262770   0.010281
-## scale(Final1$HeatShockOrNot)                            -0.131684   0.010746
-## scale(Final1$MutagenOrNot)                              -0.076962   0.009544
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.033481   0.011103
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              25.559  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -12.255  &lt; 2e-16 ***
-## scale(Final1$MutagenOrNot)                               -8.064 1.36e-15 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.016   0.0026 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1759814)
-## 
-##     Null deviance: 343.82  on 1737  degrees of freedom
-## Residual deviance: 305.15  on 1734  degrees of freedom
-##   (1536 observations deleted due to missingness)
-## AIC: 1918.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>## family 2x1 HatchedOrNot no interaction
-Final1 = Final[Final$family == &#39;2x1&#39;,];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -2.26078  -0.83679  -0.03696   0.76703   1.75275  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.17567
-## scale(Final1$MutagenConcentration)                                 -0.37153
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08912
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01654
-## scale(Final1$MutagenConcentration)                                    0.01652
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01628
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                    -10.621
-## scale(Final1$MutagenConcentration)                                 -22.494
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   5.473
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 4.79e-08 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.8245148)
-## 
-##     Null deviance: 3024.0  on 3025  degrees of freedom
-## Residual deviance: 2491.7  on 3022  degrees of freedom
-## AIC: 8005.9
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.8994  -0.6074  -0.3551   0.6882   1.9207  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.19992
-## scale(Final1$MutagenConcentration)                                 -0.40362
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.08474
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01621
-## scale(Final1$MutagenConcentration)                                    0.01619
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01596
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                     -12.33
-## scale(Final1$MutagenConcentration)                                  -24.93
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    5.31
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 1.17e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.7918597)
-## 
-##     Null deviance: 3024  on 3025  degrees of freedom
-## Residual deviance: 2393  on 3022  degrees of freedom
-## AIC: 7883.6
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -0.97518  -0.38665   0.02482   0.32566   0.74596  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.550106
-## scale(Final1$HeatShockDuration)                                    -0.116992
-## scale(Final1$MutagenConcentration)                                 -0.173435
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.004779
-##                                                                    Std. Error
-## (Intercept)                                                          0.009534
-## scale(Final1$HeatShockDuration)                                      0.009256
-## scale(Final1$MutagenConcentration)                                   0.009669
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009054
-##                                                                    t value
-## (Intercept)                                                         57.697
-## scale(Final1$HeatShockDuration)                                    -12.640
-## scale(Final1$MutagenConcentration)                                 -17.938
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -0.528
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                          &lt;2e-16 ***
-## scale(Final1$HeatShockDuration)                                      &lt;2e-16 ***
-## scale(Final1$MutagenConcentration)                                   &lt;2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.598    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2009199)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 448.25  on 2231  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2761.8
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -0.99746  -0.41850   0.00254   0.30632   0.67966  
-## 
-## Coefficients:
-##                                                                  Estimate
-## (Intercept)                                                      0.548157
-## scale(Final1$HeatShockOrNot)                                    -0.115899
-## scale(Final1$MutagenConcentration)                              -0.167760
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  0.002195
-##                                                                 Std. Error
-## (Intercept)                                                       0.009558
-## scale(Final1$HeatShockOrNot)                                      0.009310
-## scale(Final1$MutagenConcentration)                                0.009706
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009181
-##                                                                 t value
-## (Intercept)                                                      57.351
-## scale(Final1$HeatShockOrNot)                                    -12.448
-## scale(Final1$MutagenConcentration)                              -17.285
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.239
-##                                                                 Pr(&gt;|t|)    
-## (Intercept)                                                       &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot)                                      &lt;2e-16 ***
-## scale(Final1$MutagenConcentration)                                &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)    0.811    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2012733)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 449.04  on 2231  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2765.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -0.95671  -0.40255   0.04329   0.32530   0.59745  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.557315   0.009766
-## scale(Final1$HeatShockOrNot)                            -0.117455   0.009494
-## scale(Final1$MutagenOrNot)                              -0.128713   0.009603
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  0.000293   0.009093
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              57.066   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -12.372   &lt;2e-16 ***
-## scale(Final1$MutagenOrNot)                              -13.404   &lt;2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)   0.032    0.974    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.2113469)
-## 
-##     Null deviance: 547.37  on 2234  degrees of freedom
-## Residual deviance: 471.51  on 2231  degrees of freedom
-##   (790 observations deleted due to missingness)
-## AIC: 2874.9
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>## family 2x2 HatchedOrNot == negative interaction
-Final1 = Final[Final$family == &#39;2x2&#39;,];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness1) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -2.27358  -0.67884   0.04213   0.43791   2.16899  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.19674
-## scale(Final1$MutagenConcentration)                                 -0.47590
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.07636
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01772
-## scale(Final1$MutagenConcentration)                                    0.01770
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01734
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                    -11.101
-## scale(Final1$MutagenConcentration)                                 -26.882
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   4.403
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 1.11e-05 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.7532005)
-## 
-##     Null deviance: 2438.0  on 2439  degrees of freedom
-## Residual deviance: 1834.8  on 2436  degrees of freedom
-## AIC: 6235.3
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.9314  -0.4907  -0.1934   0.4834   2.4603  
-## 
-## Coefficients:
-##                                                                    Estimate
-## scale(Final1$HeatShockDuration)                                    -0.29250
-## scale(Final1$MutagenConcentration)                                 -0.47794
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  0.05868
-##                                                                    Std. Error
-## scale(Final1$HeatShockDuration)                                       0.01730
-## scale(Final1$MutagenConcentration)                                    0.01728
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)    0.01693
-##                                                                    t value
-## scale(Final1$HeatShockDuration)                                    -16.904
-## scale(Final1$MutagenConcentration)                                 -27.651
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   3.466
-##                                                                    Pr(&gt;|t|)    
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 0.000538 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.7180215)
-## 
-##     Null deviance: 2438.0  on 2439  degrees of freedom
-## Residual deviance: 1749.1  on 2436  degrees of freedom
-## AIC: 6118.6
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9214  -0.2530   0.0203   0.3138   1.0203  
-## 
-## Coefficients:
-##                                                                     Estimate
-## (Intercept)                                                         0.445026
-## scale(Final1$HeatShockDuration)                                    -0.223898
-## scale(Final1$MutagenConcentration)                                 -0.175111
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) -0.060631
-##                                                                    Std. Error
-## (Intercept)                                                          0.010224
-## scale(Final1$HeatShockDuration)                                      0.010189
-## scale(Final1$MutagenConcentration)                                   0.009829
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)   0.009516
-##                                                                    t value
-## (Intercept)                                                         43.527
-## scale(Final1$HeatShockDuration)                                    -21.975
-## scale(Final1$MutagenConcentration)                                 -17.815
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration)  -6.371
-##                                                                    Pr(&gt;|t|)    
-## (Intercept)                                                         &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                                  &lt; 2e-16 ***
-## scale(Final1$HeatShockDuration):scale(Final1$MutagenConcentration) 2.41e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1717277)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 292.62  on 1704  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1843.9
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenConcentration))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9786  -0.2470  -0.1345   0.4154   0.8655  
-## 
-## Coefficients:
-##                                                                  Estimate
-## (Intercept)                                                      0.440720
-## scale(Final1$HeatShockOrNot)                                    -0.218409
-## scale(Final1$MutagenConcentration)                              -0.174548
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) -0.039127
-##                                                                 Std. Error
-## (Intercept)                                                       0.010337
-## scale(Final1$HeatShockOrNot)                                      0.010461
-## scale(Final1$MutagenConcentration)                                0.009944
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)   0.009838
-##                                                                 t value
-## (Intercept)                                                      42.636
-## scale(Final1$HeatShockOrNot)                                    -20.879
-## scale(Final1$MutagenConcentration)                              -17.554
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration)  -3.977
-##                                                                 Pr(&gt;|t|)    
-## (Intercept)                                                      &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                                     &lt; 2e-16 ***
-## scale(Final1$MutagenConcentration)                               &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenConcentration) 7.27e-05 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1758892)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 299.72  on 1704  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1884.8
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<pre class="r"><code>summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot) * 
-##     scale(Final1$MutagenOrNot))
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9677  -0.2011  -0.2011   0.4229   0.7990  
-## 
-## Coefficients:
-##                                                          Estimate Std. Error
-## (Intercept)                                              0.446787   0.010412
-## scale(Final1$HeatShockOrNot)                            -0.212958   0.010611
-## scale(Final1$MutagenOrNot)                              -0.159476   0.009856
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot) -0.035154   0.010086
-##                                                         t value Pr(&gt;|t|)    
-## (Intercept)                                              42.911  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot)                            -20.070  &lt; 2e-16 ***
-## scale(Final1$MutagenOrNot)                              -16.181  &lt; 2e-16 ***
-## scale(Final1$HeatShockOrNot):scale(Final1$MutagenOrNot)  -3.485 0.000504 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 0.1797347)
-## 
-##     Null deviance: 425.36  on 1707  degrees of freedom
-## Residual deviance: 306.27  on 1704  degrees of freedom
-##   (731 observations deleted due to missingness)
-## AIC: 1921.7
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
 <p><br><br><br></p>
 </div>
 <div id="run-logistic-regressions-fitness-dummymutant-dummyshock-dummymutantdummyshock-need-to-take-into-accnout-families-interaction-likbez-httpswww.youtube.comwatchvgjkzpxy4eqe" class="section level4">
-<h4>5. run logistic regressions: Fitness ~ DummyMutant + DummyShock + DummyMutant<em>DummyShock ## Need to take into accnout families ## interaction LikBez: <a href="https://www.youtube.com/watch?v=gjKzpxY4EqE" class="uri">https://www.youtube.com/watch?v=gjKzpxY4EqE</a> </em>**</h4>
+<h4>6. run logistic regressions: Fitness ~ DummyMutant + DummyShock + DummyMutant<em>DummyShock ## Need to take into accnout families ## interaction LikBez: <a href="https://www.youtube.com/watch?v=gjKzpxY4EqE" class="uri">https://www.youtube.com/watch?v=gjKzpxY4EqE</a> </em>**</h4>
 <pre class="r"><code># effect of a mutagen: AS EXPECTED FOR ALL FOUR PHENOTYPES !!!
 summary(glm(Final$HatchedOrNot ~ Final$DummyMutant1, family = binomial)) # -0.62380</code></pre>
 <pre><code>## 

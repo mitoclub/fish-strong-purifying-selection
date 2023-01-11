@@ -181,7 +181,76 @@ write.table(Final, '../data/Derive.txt', quote = FALSE, sep = '\t', row.names = 
 
 <br><br><br>
 
-#### 4. run generalized multiple model with InclusiveFitness as a function of several variables. Run familial analyses (2 out of three normal families show negative epist) 40 minuts, second male and second female.
+#### 4. intrafamilial best analyses (PAPER)
+***
+```{r}
+#### THE BEST ANALYSES SHOULD BE DONE WITHIN EACH FAMILY: UNDER ALL ELSE EQUAL - THE SAME GENETICS OF MOTHER AND FATHER. out of four families one (1x1) has strange results (no effect of heat shock), another (2x1) no interaction and two others (2x2 and 1x2) negative interaction. So, not so bad! 
+
+#### check whether each family shows expected simple trends: negative correlation with heat shock and negative with mutagen:
+
+Final1 = Final[Final$family == '1x1',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))
+Final1 = Final[Final$family == '1x2',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 +  scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))
+Final1 = Final[Final$family == '2x1',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))
+Final1 = Final[Final$family == '2x2',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration)))
+
+Final1 = Final[Final$family != '1x1',]; summary(glm(scale(Final1$HatchedOrNot) ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) 
+
+##### so, family 1x1 doesn't show expected trend - either something was wrong, or genetical combination is unusual (tolerability to stress)? we can exclude it from additional analyses because additional analyses are based on interaction of variables, but if there is no individual effect -> no sense to see the interaction. 
+
+#### check whether each family shows interaction (different results but never positive significant)
+
+Final1 = Final[Final$family == '1x2',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+Final1 = Final[Final$family == '2x1',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+Final1 = Final[Final$family == '2x2',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+
+Final1 = Final[Final$family != '1x1',]; summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+
+Final1 = Final[Final$family != '1x1',]; 
+summary(glm(scale(Final1$HatchedOrNot) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration) + scale(Final1$Female1OrNot) + scale(Final1$Male1OrNot)))
+
+
+############ OTHER ANALYSES 
+## family 1x1 HatchedOrNot positive, but effect of HeatShock is positive!
+Final1 = Final[Final$family == '1x1',];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # this model doesn't show effect of heat shock 
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
+
+
+## family 1x2 HatchedOrNot weakly negative
+Final1 = Final[Final$family == '1x2',];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
+
+## family 2x1 HatchedOrNot no interaction
+Final1 = Final[Final$family == '2x1',];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
+
+## family 2x2 HatchedOrNot == negative interaction
+Final1 = Final[Final$family == '2x2',];
+summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
+summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
+
+
+
+```
+
+<br><br><br>
+
+#### 5. run generalized multiple model with InclusiveFitness as a function of several variables. Run familial analyses (2 out of three normal families show negative epist) 40 minuts, second male and second female.
 ***
 ```{r}
 names(Final)
@@ -241,72 +310,12 @@ summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$Muta
 summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # !!!!
 summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)+ Final1$Female1OrNot))
 
-#### THE BEST ANALYSES SHOULD BE DONE WITHIN EACH FAMILY: UNDER ALL ELSE EQUAL - THE SAME GENETICS OF MOTHER AND FATHER. out of four families one (1x1) has strange results (no effect of heat shock), another (2x1) no interaction and two others (2x2 and 1x2) negative interaction. So, not so bad! 
-
-#### check whether each family shows expected simple trends: negative correlation with heat shock and negative with mutagen:
-
-Final1 = Final[Final$family == '1x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # NO => which settings are wrong (which heat interval / mutagen)? check it later!!!
-Final1 = Final[Final$family == '1x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES
-Final1 = Final[Final$family == '2x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES
-Final1 = Final[Final$family == '2x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # YES
-
-Final1 = Final[Final$family != '1x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # NO =>
-
-##### so, family 1x1 doesn't show expected trend - either something was wrong, or genetical combination is unusual (tolerability to stress)? we can exclude it from additional analyses because additional analyses are based on interaction of variables, but if there is no individual effect -> no sense to see the interaction. 
-
-#### check whether each family shows interaction (different results but never positive significant)
-
-Final1 = Final[Final$family == '1x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # NO
-Final1 = Final[Final$family == '2x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # NO
-Final1 = Final[Final$family == '2x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # YES
-
-Final1 = Final[Final$family != '1x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration))) # YES! THIS IS THE BEST AND REASONABLE RESULT TILL NOW
-
-Final1 = Final[Final$family == '1x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # YES
-Final1 = Final[Final$family == '2x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # NO
-Final1 = Final[Final$family == '2x2',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # YES
-
-Final1 = Final[Final$family != '1x1',]; summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot))) # NO
-
-## family 1x1 HatchedOrNot positive, but effect of HeatShock is positive!
-Final1 = Final[Final$family == '1x1',];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)+scale(Final1$MutagenConcentration))) # this model doesn't show effect of heat shock 
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
-
-
-## family 1x2 HatchedOrNot weakly negative
-Final1 = Final[Final$family == '1x2',];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
-
-## family 2x1 HatchedOrNot no interaction
-Final1 = Final[Final$family == '2x1',];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
-
-## family 2x2 HatchedOrNot == negative interaction
-Final1 = Final[Final$family == '2x2',];
-summary(glm(scale(Final1$InclusiveFitness1) ~ 0 +  scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(scale(Final1$InclusiveFitness2) ~ 0 + scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockDuration)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenConcentration)))
-summary(glm(Final1$HatchedOrNot ~ scale(Final1$HeatShockOrNot)*scale(Final1$MutagenOrNot)))
 
 ```
 
 <br><br><br>
 
-#### 5. run logistic regressions: Fitness ~ DummyMutant + DummyShock + DummyMutant*DummyShock
+#### 6. run logistic regressions: Fitness ~ DummyMutant + DummyShock + DummyMutant*DummyShock
 ## Need to take into accnout families 
 ## interaction LikBez: https://www.youtube.com/watch?v=gjKzpxY4EqE
 ***
