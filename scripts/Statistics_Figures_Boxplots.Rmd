@@ -393,12 +393,12 @@ summary(MANOVA_TEST_ENU_Temp_VS_Hatched_1x2)
 
 ## Time+ENU VS Hatched percent 2x1
 ```{r}
-tth01_2x1 <- ggplot(Fish_2x1, (aes(mode_scr, hatched_per)))+
+ttf01_2x1 <- ggplot(Fish_2x1, (aes(mode_scr, hatched_per)))+
   geom_boxplot(aes(col=mode_scr))+
   theme_bw()
-tth011_2x1 <- ttf01_2x1+ geom_point(aes(col=enu))+ggtitle("Hatched percent 2x1 \n vs Time+ENU")+
-  xlab("Time+ENU") + ylab("Hatched percent")
-tth011_2x1 = tth011_2x1 + theme_bw()+ theme(axis.text = element_text(size = 6))
+tth011_2x1 <- ttf01_2x1+ geom_point(aes(col=mode_scr))+ggtitle("Hatched percent 2x1 \n vs Time+ENU")+
+  xlab("Time+ENU") + ylab("Hatched percent")+ theme(axis.text = element_text(size = 6))
+
 ```
 
 ### Statistics
