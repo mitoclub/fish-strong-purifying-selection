@@ -1,0 +1,107 @@
+---
+title: "Fish Handicap: whether heat shock decreases fitness stronger in mutated lines? YES IT IS"
+author: "Konstantin Popadin"
+date: "18/Jan/2023"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls(all=TRUE))
+library(knitr)
+library(tidyverse)
+library(kableExtra)
+```
+
+## Background
+<br>
+Here, we plan to produce and compare decrease in the percent of Hatched due to heat shock in different ENU groups.
+If heat shock aggravates effect of deleterious variants, this decrease should be the highest in ENU 2 group, next ENU 1.5 group and finally ENU 0 group.
+<br><br><br>
+
+#### 1. Read the egg-centered dataset from the main carp experiment 
+***
+```{r}
+Fish = read.table('../data/Derive.txt', header = TRUE)
+Final = data.frame()
+EnuConcentrVec = unique(Fish$MutagenConcentration); length(EnuConcentrVec)
+FamiliesVec    = unique(Fish$family); length(FamiliesVec)
+HeatShockTimeVec   = c(30,40,50) # 0 is a control which is always will be used for comparison
+
+for (FamiliesVecIndex in c(1:length(FamiliesVec)))
+{
+for (EnuConcentrVecIndex in c(1:length(EnuConcentrVec)))
+{
+for (HeatShockTimeVecIndex in c(1:length(HeatShockTimeVec)))
+{
+
+TempVec = Fish[Fish$family == FamiliesVec[FamiliesVecIndex] & Fish$time == HeatShockTimeVec[HeatShockTimeVecIndex] & Fish$MutagenConcentration == EnuConcentrVec[EnuConcentrVecIndex],]$HatchedOrNot  
+NonHatchedHsCases = length(TempVec[!is.na(TempVec) & TempVec ==0])
+HatchedHsCases = length(TempVec[!is.na(TempVec) & TempVec ==1])
+AllHsCases=HatchedHsCases + NonHatchedHsCases
+
+TempVec = Fish[Fish$family == FamiliesVec[FamiliesVecIndex] & Fish$time == 0 & Fish$MutagenConcentration == EnuConcentrVec[EnuConcentrVecIndex],]$HatchedOrNot
+NonHatchedHsControls = length(TempVec[!is.na(TempVec) & TempVec ==0])
+HatchedHsControls = length(TempVec[!is.na(TempVec) & TempVec ==1])
+AllHsControls = NonHatchedHsControls + HatchedHsControls
+
+OneLine = data.frame(FamiliesVec[FamiliesVecIndex],EnuConcentrVec[EnuConcentrVecIndex],HeatShockTimeVec[HeatShockTimeVecIndex],AllHsCases,HatchedHsCases,AllHsControls,HatchedHsControls) 
+Final = rbind(Final,OneLine)
+
+}}}
+
+Final$DecreaseInHatchedDuetoHeatShock = (Final$HatchedHsCases/Final$AllHsCases) / (Final$HatchedHsControls/Final$AllHsControls)
+nrow(Final)
+names(Final)[1:3] = c('family','MutagenConcentration','HeatShockTime')
+# 12 (cells in the table) * 3 (enu regimes) = 36 
+
+Final = Final[order(Final$family,Final$HeatShockTime,Final$MutagenConcentration),]
+Final$DecreaseInHatchedDuetoHeatShock = round(Final$DecreaseInHatchedDuetoHeatShock,3)
+
+write.table(Final, '../data/FishTableOfInteractionsKP.Rmd.txt', quote = FALSE, sep = '\t', row.names = FALSE)
+  
+```
+
+<br><br><br>
+
+#### 2. do statistics 
+***
+```{r}
+## do pairwise comparisons including all families: 
+summary(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+
+summary(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+
+summary(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+
+## do pairwise comparisons excluding 1x1 family: 
+FinalFinal = Final
+
+Final = Final[Final$family != '1x1',]
+summary(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+
+summary(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 0,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+
+summary(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock - Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock)
+wilcox.test(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE)
+wilcox.test(Final[Final$MutagenConcentration == 1.5,]$DecreaseInHatchedDuetoHeatShock,Final[Final$MutagenConcentration == 2,]$DecreaseInHatchedDuetoHeatShock, paired = TRUE, alternative = 'greater')
+```
+
+<br><br><br>
+
+#### 3. plot!!??? Not me
+***
+```{r}
+```
