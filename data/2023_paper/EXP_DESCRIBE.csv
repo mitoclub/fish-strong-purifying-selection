@@ -1,0 +1,13 @@
+№,START,END,female,male,PLACE,TYPE,subhidings,CONDITIONS,COMMENT
+1,09.06.23,16.06.23,ZU-NK (mix),MS (mix),lab,Tuning,,"stage=V/P, temp=20/35/37/38, time=0/40/60/120/180, mut=M/C","decided to step on stage below: from Pharingula to Vesicle (22somites) and wide fork temp+time
+ALSO we supposed significant difference between SHIELDED (more sustainable) AND RAZBROSANNIY"
+1,09.06.23,16.06.23,ZU-NK (mix),MR (mix),lab,Tuning,,"stage=V/P, temp=20/35/37/38, time=0/40/60/120/180, mut=M/C",
+2,19.06.23,24.06.23,MR,MR,lab,Tuning,,"family=11/12/21/22, stage=G/V, temp=20/37/38, time=0/30/40/120/180, mut=M/C",We found fragile stage V and wonder decided to go even further till Gastrulation stage with wide forks temp+time
+3,19.06.23,24.06.23,MR,MR,lab,FAILED,,"tried to freez control and obtained by mutagen sperm, MEDIUM problems","In this analysis our goal was showing how mutagen affect on sperm quality, with/without FREEZING"
+4,21.06.23,29.06.23,BF (mix),BF (mix),lab,Tuning,,"stage=V/P, temp=20/38, time=0/20/30/40/50, mut=M/C",Looking how our handicap conditions works on weakest line
+5,26.06.23,03.07.23,MR,Naked,lab,Main,,"family=11/12/21/22, stage=V, temp=20/38, time=0/40, mut=M/C",
+5,26.06.23,03.07.23,MR,Naked,factory,Main,,"family=11/12/21/22, stage=V, temp=20/38, time=0/50, mut=M/C",
+6,30.06.23,07.07.23,MR (mix),MR (mix),lab,Main,,FREEZ_SPERM_8_medium,"In this analysis our goal was showing how mutagen affect on sperm quality, 
+with/without FREEZING and create 8 mediums to be for sure"
+7,30.06.23,07.07.23,MR (mix),MR (mix),lab,Tuning,,"stage=G, temp=20/37/38, time=5/10/30/60, mut=M/C",
+8,05.07.23,13.07.23,ZU-NK (mix),ZU-NK (mix),factory,Main,,"stage=V, temp=20/38, time=0/40, mut=M/C",
