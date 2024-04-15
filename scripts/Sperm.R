@@ -12,8 +12,8 @@ sperm_cont = read.xlsx(paste(path_to_sperm, 'Контроль.xlsx', sep = ''), 
 sperm_mut = read.xlsx(paste(path_to_sperm, 'Мутантный.xlsx', sep = ''), sheetIndex=1, startRow=6)
 
 
-sperm_cont$Condition = 'Контроль'
-sperm_mut$Condition = 'Мутант'
+sperm_cont$Condition = 'Control'
+sperm_mut$Condition = 'Mutant'
 
 sperm_full = rbind(sperm_cont, sperm_mut)
 sperm_full$Condition = as.factor(sperm_full$Condition)
@@ -22,36 +22,41 @@ group_count = as.data.frame(table(sperm_full$Condition))
 names(group_count) = c('Condition', 'n')
 
 
-
 ### PLOT VCL, VSL, VAP
+pdf(file='../figures/SPERM_analysis.pdf', height = 5, )
+ 
+
 ggplot(data=sperm_full, aes(x=Condition, y=VSL, col=Condition))+
   geom_boxplot(show.legend = FALSE)+
   geom_text(data = group_count, aes(x = Condition, y = max(sperm_full$VSL)+1, label = paste("N =", n)), 
             position = position_dodge(width =0.25), vjust = -0.5, col='black')+
+  ggtitle('Comaprison of the VSL')+
   theme_classic()
 
 ### Not significant
-wilcox.test(sperm_full[sperm_full$Condition == 'Контроль',]$VSL, sperm_full[sperm_full$Condition == 'Мутант',]$VSL, paired=FALSE)  
+wilcox.test(sperm_full[sperm_full$Condition == 'Control',]$VSL, sperm_full[sperm_full$Condition == 'Mutant',]$VSL, paired=FALSE)  
 
 ggplot(data=sperm_full, aes(x=Condition, y=VCL, col=Condition))+
   geom_boxplot(show.legend = FALSE)+
   geom_text(data = group_count, aes(x = Condition, y = max(sperm_full$VCL)+1, label = paste("N =", n)), 
             position = position_dodge(width =0.25), vjust = -0.5, col='black')+
+  ggtitle('Comaprison of the VCL')+
   theme_classic()
 
 ###Significant
-wilcox.test(sperm_full[sperm_full$Condition == 'Контроль',]$VCL, sperm_full[sperm_full$Condition == 'Мутант',]$VCL, paired=FALSE)  
+wilcox.test(sperm_full[sperm_full$Condition == 'Control',]$VCL, sperm_full[sperm_full$Condition == 'Mutant',]$VCL, paired=FALSE)  
 
 ggplot(data=sperm_full, aes(x=Condition, y=VAP, col=Condition))+
   geom_boxplot(show.legend = FALSE)+
   geom_text(data = group_count, aes(x = Condition, y = max(sperm_full$VAP)+1, label = paste("N =", n)), 
             position = position_dodge(width =0.25), vjust = -0.5, col='black')+
+  ggtitle('Comaprison of the VAP')+
   theme_classic()
 
 ###Significant
-wilcox.test(sperm_full[sperm_full$Condition == 'Контроль',]$VAP, sperm_full[sperm_full$Condition == 'Мутант',]$VAP, paired=FALSE)  
+wilcox.test(sperm_full[sperm_full$Condition == 'Control',]$VAP, sperm_full[sperm_full$Condition == 'Mutant',]$VAP, paired=FALSE)  
 
-
+dev.off()
 
 ### How many zeros in each feature
 
@@ -97,4 +102,21 @@ summary.aov(res.man)
 # adonis2(sperm_full[sperm_full$VCL < 0,c('VCL', 'VSL', 'VAP')] ~ sperm_full$Condition, data=sperm_full, method = "bray")
 
 
+### Try to use other features that do not depends on VAP (too much zeros)
+### We have LIN, ВСF????, MAD
+
+
+### In LIN to much low data
+ggplot(data=sperm_full, aes(x=Condition, y=LIN, col=Condition))+
+  geom_boxplot(show.legend = FALSE)+
+  geom_text(data = group_count, aes(x = Condition, y = max(sperm_full$LIN)+1, label = paste("N =", n)), 
+            position = position_dodge(width =0.25), vjust = -0.5, col='black')+
+  theme_classic()
+
+### 
+ggplot(data=sperm_full, aes(x=Condition, y=MAD, col=Condition))+
+  geom_boxplot(show.legend = FALSE)+
+  geom_text(data = group_count, aes(x = Condition, y = max(sperm_full$MAD)+1, label = paste("N =", n)), 
+            position = position_dodge(width =0.25), vjust = -0.5, col='black')+
+  theme_classic()
 
